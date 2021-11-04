@@ -15,7 +15,7 @@ export class ContractController {
     }
 
     @Get('/:id')
-    getContract(@Param('id') id: string) {
+    getContract(@Param('id') id: number) {
         return this.contractService.getContractById(id);
     }
 
@@ -25,12 +25,12 @@ export class ContractController {
     }
 
     @Delete('/:id')
-    deleteContract(@Param('id') id: string) {
+    deleteContract(@Param('id') id: number) {
         return this.contractService.deleteContractById(id);
     }
 
     @Patch('/:id')
-    updateContract(@Param('id') id: string, @Body() updateContractDto) {
+    updateContract(@Param('id') id: number, @Body() updateContractDto) {
         return this.contractService.updateContract(id, updateContractDto);
     }
 }

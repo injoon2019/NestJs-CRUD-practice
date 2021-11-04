@@ -10,12 +10,12 @@ export class ContractService {
         return this.contracts;
     }
 
-    getContractById(id: string): Contract {
-        return this.contracts.find(contract => contract.id === +id);
+    getContractById(id: number): Contract {
+        return this.contracts.find(contract => contract.id === id);
     }
 
-    deleteContractById(id: string): boolean {
-        this.contracts = this.contracts.filter(contract => contract.id !== +id);
+    deleteContractById(id: number): boolean {
+        this.contracts = this.contracts.filter(contract => contract.id !== id);
         return true;
     }
 
@@ -26,9 +26,9 @@ export class ContractService {
         })
     }
 
-    updateContract(id: string, updateCreateData) {
+    updateContract(id: number, updateCreateData) {
         const contract  = this.getContractById(id);
         this.deleteContractById(id);
-        this.contracts.push({"id": id, ...updateCreateData});
+        this.contracts.push({...contract, ...updateCreateData});
     }
 }

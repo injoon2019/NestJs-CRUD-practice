@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Contract } from '../domain/contract.entity';
+import { CreateContractDto } from '../domain/createContract.dto';
 
 @Injectable()
 export class ContractService {
@@ -14,20 +15,20 @@ export class ContractService {
     }
 
     deleteContractById(id: string): boolean {
-        this.contracts.filter(contract => contract.id !== +id);
+        this.contracts = this.contracts.filter(contract => contract.id !== +id);
         return true;
     }
 
-    createContract(contractData) {
+    createContract(contractData: CreateContractDto) {
         this.contracts.push({
             id: this.contracts.length + 1,
             ...contractData,
         })
     }
 
-    update(id: string, updateCreateData) {
+    updateContract(id: string, updateCreateData) {
         const contract  = this.getContractById(id);
         this.deleteContractById(id);
-        this.contracts.push({...contract, ...updateCreateData});
+        this.contracts.push({"id": id, ...updateCreateData});
     }
 }

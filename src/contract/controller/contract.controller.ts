@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { createHistogram } from 'perf_hooks';
 import { Contract } from '../domain/contract.entity';
+import { CreateContractDto } from '../domain/createContract.dto';
 import { ContractService } from '../service/contract.service';
 
 @Controller('contract')
@@ -19,7 +20,7 @@ export class ContractController {
     }
 
     @Post()
-    createContract(@Body() contractCreateDto) {
+    createContract(@Body() contractCreateDto: CreateContractDto) {
         return this.contractService.createContract(contractCreateDto);
     }
 
@@ -30,6 +31,6 @@ export class ContractController {
 
     @Patch('/:id')
     updateContract(@Param('id') id: string, @Body() updateContractDto) {
-        return this.contractService.
+        return this.contractService.updateContract(id, updateContractDto);
     }
 }
